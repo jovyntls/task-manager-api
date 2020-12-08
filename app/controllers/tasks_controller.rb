@@ -51,7 +51,7 @@ class TasksController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def task_params
-    params.permit(:title, :user_id)
+    params.permit(:title, :user_id, :cat_id)
     # params.require(:task).permit(:title, :user_id)
   end
 end
