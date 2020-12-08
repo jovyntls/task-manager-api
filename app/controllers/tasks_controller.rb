@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :authorized, :set_task, only: %i[show update destroy]
+  before_action :authorized  # , :set_task, only: %i[show update destroy]
 
   # GET /tasks
   def index
@@ -10,6 +10,8 @@ class TasksController < ApplicationController
 
   # GET /tasks/1
   def show
+    @task = Task.where(id: params[:id])
+
     render json: @task
   end
 
@@ -27,6 +29,7 @@ class TasksController < ApplicationController
 
   # PATCH/PUT /tasks/1
   def update
+    @task = Task.where(id: params[:id])
     if @task.update(task_params)
       render json: @task
     else
@@ -36,7 +39,7 @@ class TasksController < ApplicationController
 
   # DELETE /tasks/1
   def destroy
-    @task.destroy
+    Task.destroy(params[:id])
   end
 
   private
@@ -48,6 +51,7 @@ class TasksController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def task_params
-    params.require(:task).permit(:title, :user_id)
+    params.permit(:title, :user_id)
+    # params.require(:task).permit(:title, :user_id)
   end
 end
