@@ -10,39 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_08_073037) do
-
+ActiveRecord::Schema.define(version: 20_201_208_073_037) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "cats", force: :cascade do |t|
-    t.string "title"
-    t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_cats_on_user_id"
+  create_table 'cats', force: :cascade do |t|
+    t.string 'title'
+    t.bigint 'user_id', null: false
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['user_id'], name: 'index_cats_on_user_id'
   end
 
-  create_table "tasks", force: :cascade do |t|
-    t.string "title"
-    t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "priority", default: 0
-    t.boolean "completed", default: false
-    t.bigint "cat_id", null: false
-    t.index ["cat_id"], name: "index_tasks_on_cat_id"
-    t.index ["user_id"], name: "index_tasks_on_user_id"
+  create_table 'tasks', force: :cascade do |t|
+    t.string 'title'
+    t.bigint 'user_id', null: false
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.integer 'priority', default: 0
+    t.boolean 'completed', default: false
+    t.bigint 'cat_id', null: false
+    t.index ['cat_id'], name: 'index_tasks_on_cat_id'
+    t.index ['user_id'], name: 'index_tasks_on_user_id'
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "username"
-    t.string "password_digest"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'users', force: :cascade do |t|
+    t.string 'username'
+    t.string 'password_digest'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
-  add_foreign_key "cats", "users"
-  add_foreign_key "tasks", "cats"
-  add_foreign_key "tasks", "users"
+  add_foreign_key 'cats', 'users'
+  add_foreign_key 'tasks', 'cats'
+  add_foreign_key 'tasks', 'users'
 end

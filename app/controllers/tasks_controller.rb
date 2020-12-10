@@ -3,7 +3,7 @@ class TasksController < ApplicationController
 
   # GET /tasks
   def index
-    @tasks = Task.where(user_id: @user.id)
+    @tasks = Task.where(user_id: @user.id).order('created_at')
 
     render json: @tasks
   end
