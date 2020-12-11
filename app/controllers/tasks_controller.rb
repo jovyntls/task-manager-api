@@ -15,6 +15,13 @@ class TasksController < ApplicationController
     render json: @task
   end
 
+  # GET /tasks/cat/1
+  def catid
+    @task = Task.where(user_id: @user.id).where(cat_id: params[:cat_id]).order('created_at')
+
+    render json: @task
+  end
+
   # POST /tasks
   def create
     @task = Task.new(task_params)

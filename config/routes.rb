@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   resource :users, only: [:create]
   post '/login', to: 'users#login'
   get '/auto_login', to: 'users#auto_login'
+  get '/tasks/cat/:cat_id', to: 'tasks#catid'
 end
