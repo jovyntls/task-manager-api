@@ -39,6 +39,7 @@ class CatsController < ApplicationController
 
   # DELETE /cats/1
   def destroy
+    Task.where(cat_id: params[:id]).destroy_all
     Cat.destroy(params[:id])
   end
 
