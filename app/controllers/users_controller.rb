@@ -6,18 +6,26 @@ class UsersController < ApplicationController
     @user = User.create(user_params)
     if @user.valid?
       token = encode_token({ user_id: @user.id })
-      # seed data
-      @cat = Cat.new({ title: 'Explore task manager', user_id: @user.id })
-      @cat.save
-      Task.create([
-                    { title: 'create an account', cat_id: @cat.id, user_id: @user.id, completed: true },
-                    { title: 'create a new category', cat_id: @cat.id, user_id: @user.id },
-                    { title: '<-- click to change priority!', cat_id: @cat.id, user_id: @user.id, priority: 1 }
-                  ])
+      seed
       render json: { user: @user, token: token }
+    elsif @user.errors.any?
+      @user.errors.each do |_attribute, message|
+        render json: { error: message.to_s }
+      end
     else
-      render json: { error: 'Invalid username or password' }
+      render json: { error: 'An error occurred. Try again later' }
     end
+  end
+
+  def seed
+    # seed data
+    @cat = Cat.new({ title: 'Explore task manager', user_id: @user.id })
+    @cat.save
+    Task.create([
+                  { title: 'create an account', cat_id: @cat.id, user_id: @user.id, completed: true },
+                  { title: 'create a new category', cat_id: @cat.id, user_id: @user.id },
+                  { title: '<-- click to change priority!', cat_id: @cat.id, user_id: @user.id, priority: 1 }
+                ])
   end
 
   # LOGGING IN
