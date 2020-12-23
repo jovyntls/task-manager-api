@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   post '/signup', to: 'users#create'
   get '/auto_login', to: 'users#auto_login'
   get '/tasks/cat/:cat_id', to: 'tasks#catid'
-  get '/items_tags/cat/:cat_id', to: 'items_tags#catid'
-  get '/items_tags/cat/:tag_id', to: 'items_tags#tagid'
+  get '/items_tags/by_cat/:cat_id', to: 'items_tags#catid'
+  get '/items_tags/by_tag/:tag_id', to: 'items_tags#tagid'
+  delete '/items_tags/:tag_id/:cat_id', to: 'items_tags#remove'
 end

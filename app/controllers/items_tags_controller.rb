@@ -3,32 +3,33 @@ class ItemsTagsController < ApplicationController
 
   # GET /items_tags
   def index
-    @items_tags = ItemsTag.all
+    @items_tags = ItemsTag.where(user_id: @user.id)
 
     render json: @items_tags
   end
 
   # GET /items_tags/1
   def show
-    @task = Task.where(id: params[:id])
+    @items_tag = ItemsTag.where(id: params[:id])
     render json: @items_tag
   end
 
   # GET /items_tags/by_cat/1
   def catid
-    @task = Task.where(cat_id: params[:cat_id])
+    @items_tag = ItemsTag.where(cat_id: params[:cat_id])
     render json: @items_tag
   end
 
   # GET /items_tags/by_tag/1
   def tagid
-    @task = Task.where(tag_id: params[:tag_id])
+    @items_tag = ItemsTag.where(tag_id: params[:tag_id])
     render json: @items_tag
   end
 
   # POST /items_tags
   def create
     @items_tag = ItemsTag.new(items_tag_params)
+    @items_tag.user_id = @user.id
 
     if @items_tag.save
       render json: @items_tag, status: :created, location: @items_tag
@@ -42,6 +43,13 @@ class ItemsTagsController < ApplicationController
     ItemsTag.destroy(params[:id])
   end
 
+  # DELETE /items_tags/:tag_id/:cat_id
+  def remove
+    puts params
+    puts "destroyed tag_id: #{params[:tag_id]}, cat_id: #{params[:cat_id]}"
+    ItemsTag.where(tag_id: params[:tag_id]).where(cat_id: params[:cat_id]).destroy_all
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -51,6 +59,6 @@ class ItemsTagsController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def items_tag_params
-    params.require(:items_tag).permit(:tag_id, :cat_id)
+    params.permit(:tag_id, :cat_id, :user_id)
   end
 end

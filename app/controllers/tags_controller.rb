@@ -3,7 +3,7 @@ class TagsController < ApplicationController
 
   # GET /tags
   def index
-    @tasks = Tag.where(user_id: @user.id).order('title')
+    @tags = Tag.where(user_id: @user.id).order('title')
 
     render json: @tags
   end
@@ -39,6 +39,7 @@ class TagsController < ApplicationController
 
   # DELETE /tags/1
   def destroy
+    ItemsTag.where(tag_id: params[:id]).destroy_all
     Tag.destroy(params[:id])
   end
 
