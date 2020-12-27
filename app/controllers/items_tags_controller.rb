@@ -45,8 +45,6 @@ class ItemsTagsController < ApplicationController
 
   # DELETE /items_tags/:tag_id/:cat_id
   def remove
-    puts params
-    puts "destroyed tag_id: #{params[:tag_id]}, cat_id: #{params[:cat_id]}"
     ItemsTag.where(tag_id: params[:tag_id]).where(cat_id: params[:cat_id]).destroy_all
   end
 

@@ -26,6 +26,15 @@ class UsersController < ApplicationController
                   { title: 'create a new category', cat_id: @cat.id, user_id: @user.id },
                   { title: '<-- click to change priority!', cat_id: @cat.id, user_id: @user.id, priority: 1 }
                 ])
+    @tag = Tag.new({ title: 'important', user_id: @user.id })
+    @tag.save
+    ItemsTag.create([{ tag_id: @tag.id, cat_id: @cat.id, user_id: @user.id }])
+    @cat = Cat.new({ title: 'CVWO assignment', user_id: @user.id })
+    @cat.save
+    Task.create([
+                  { title: 'mid assignment submission', cat_id: @cat.id, user_id: @user.id, completed: true },
+                  { title: 'final submission', cat_id: @cat.id, user_id: @user.id, priority: 2 }
+                ])
   end
 
   # LOGGING IN

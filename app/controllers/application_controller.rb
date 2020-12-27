@@ -7,7 +7,6 @@ class ApplicationController < ActionController::API
 
   def auth_header
     # { Authorization: 'Bearer <token>' }
-    puts request.headers['Authorization']
     request.headers['Authorization']
   end
 
