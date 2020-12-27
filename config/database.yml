@@ -83,6 +83,8 @@ test:
 production:
   <<: *default
   database: tasks_api_production
-  url: <%= ENV['DBURI'] %>
+  url: <%= ENV['DATABASE_URL'] %>
+  # url: <%= ENV['DBURI'] %>
+  # url: postgres://fllhaxqwekzkpy:46c284fdb2203f8b73ab5d2a5f5a0e490d368a35dc89d934f501ca5dc8e052de@ec2-3-208-224-152.compute-1.amazonaws.com:5432/d9fghbkg4elhh6
   username: tasks_api
   password: <%= ENV['TASKS_API_DATABASE_PASSWORD'] %>
