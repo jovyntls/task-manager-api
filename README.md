@@ -1,24 +1,7 @@
-# README
+# Task Manager API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+For CVWO Assignment 2020
+Name: Jovyn Tan Li Shyan
+Matric No.: A0225607H
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+This repository contains the backend of the task manager app. It is hosted on Heroku.
