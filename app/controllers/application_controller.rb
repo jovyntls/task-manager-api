@@ -2,7 +2,8 @@ class ApplicationController < ActionController::API
   before_action :authorized
 
   def encode_token(payload)
-    JWT.encode(payload, 'jovynsecretkey123')  # should be an ENV variable in production !!!
+    secretkey = ENV['RAILS_ENV'] == 'production' ? ENV['TASK_MANAGER_APP_SECRET'] : 'developmentsecretkey'
+    JWT.encode(payload, secretkey)  # should be an ENV variable in production !!!
   end
 
   def auth_header
@@ -13,9 +14,11 @@ class ApplicationController < ActionController::API
   def decoded_token
     if auth_header
       token = auth_header.split(' ')[1]
+      secretkey = ENV['RAILS_ENV'] == 'production' ? ENV['TASK_MANAGER_APP_SECRET'] : 'developmentsecretkey'
+
       # header: { 'Authorization': 'Bearer <token>' }
       begin
-        JWT.decode(token, 'jovynsecretkey123', true, algorithm: 'HS256')
+        JWT.decode(token, secretkey, true, algorithm: 'HS256')
       rescue JWT::DecodeError
         nil
       end
