@@ -9,9 +9,7 @@ class UsersController < ApplicationController
       seed
       render json: { user: @user, token: token }
     elsif @user.errors.any?
-      @user.errors.each do |_attribute, message|
-        render json: { error: message.to_s }
-      end
+      render json: { error: @user.errors.full_messages.first }
     else
       render json: { error: 'An error occurred. Try again later' }
     end

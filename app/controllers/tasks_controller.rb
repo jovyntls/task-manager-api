@@ -49,6 +49,11 @@ class TasksController < ApplicationController
     Task.destroy(params[:id])
   end
 
+  # DELETE /tasks/completed/cat_id
+  def clearcompleted
+    Task.where(cat_id: params[:cat_id]).where(completed: true).destroy_all
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.

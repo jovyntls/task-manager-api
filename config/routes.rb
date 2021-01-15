@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   get '/items_tags/by_cat/:cat_id', to: 'items_tags#catid'
   get '/items_tags/by_tag/:tag_id', to: 'items_tags#tagid'
   delete '/items_tags/:tag_id/:cat_id', to: 'items_tags#remove'
+  delete '/tasks/completed/:cat_id', to: 'tasks#clearcompleted'
 end
